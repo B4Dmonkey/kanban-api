@@ -2,7 +2,17 @@ import Task from  '../models/task.model';
 
 const rootTask = async(req, res) => {
   try{
-
+    const rootTask = await Task.findOne({isRoot:true});
+    if (rootTask) return res.status(200).json({root: rootTask.id});
+    
+    const task = await Task.create({
+      parents: null,
+      children: null,
+      content: null,
+      status: 'root',
+      isRoot: true,
+    });
+    return res.status(201).json({root: task.id});
   } catch ( error ) {
     console.error(`task.controller@newTask: ${error.toString()}`);
     return res.status(500).json({ error: `Internal server error. \n ${error.toString()}` });

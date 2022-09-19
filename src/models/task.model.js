@@ -18,13 +18,18 @@ const taskSchema = new Schema({
     type: String,
     required: true,
     default: 'todo',
-    enum: ['todo', 'doing', 'done' ]
+    enum: ['root','todo', 'doing', 'done' ]
   },
   archived: {
     type: Boolean,
     required: true,
     default: false
   },
+  isRoot: {
+    type: Boolean,
+    required: true,
+    default: false,
+  }
 },{ timestamps: true });
 
 const Task = mongoose.model('Task', taskSchema);

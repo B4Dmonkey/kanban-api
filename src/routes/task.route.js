@@ -1,5 +1,6 @@
 import express from 'express';
-import { 
+import {
+  rootTask,
   newTask,
   getTask,
   updateTask,
@@ -7,6 +8,11 @@ import {
 } from '../controllers/task.controller';
 
 const router = express.Router();
+
+router.get(
+  '/init',
+  rootTask
+);
 
 router.post(
   '/',
@@ -26,6 +32,6 @@ router.put(
 router.delete(
   '/',
   archiveTask
-)
+);
 
 module.exports = router;
