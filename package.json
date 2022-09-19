@@ -2,20 +2,16 @@
   "name": "kanban-api",
   "version": "0.0.0",
   "private": true,
+  "main": "src/app.js",
   "scripts": {
     "start": "babel-node src/app.js",
     "dev": "NODE_ENV=development nodemon --exec babel-node src/app.js"
-
   },
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "mongodb": "^4.9.1",
-    "mongoose": "^6.6.1",
-    "morgan": "~1.9.1"
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "http": "^0.0.1-security",
+    "mongoose": "^5.12.8"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
