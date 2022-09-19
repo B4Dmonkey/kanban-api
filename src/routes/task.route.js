@@ -1,5 +1,10 @@
 import express from 'express';
 import {
+  hasParent,
+  hasContent,
+  validStatus
+} from '../middleware/task.middleware';
+import {
   rootTask,
   newTask,
   getTask,
@@ -16,6 +21,9 @@ router.get(
 
 router.post(
   '/',
+  hasParent,
+  hasContent,
+  validStatus,
   newTask
 );
 

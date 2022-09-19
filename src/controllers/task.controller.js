@@ -1,4 +1,5 @@
 import Task from  '../models/task.model';
+import { ROOT } from '../models/enums';
 
 const rootTask = async(req, res) => {
   try{
@@ -9,7 +10,7 @@ const rootTask = async(req, res) => {
       parents: null,
       children: null,
       content: null,
-      status: 'root',
+      status: ROOT,
       isRoot: true,
     });
     return res.status(201).json({root: task.id});
@@ -25,9 +26,18 @@ const newTask = async(req, res) => {
       parent,
       content,
       status,
-    } = req.query;
+    } = req.body;
+    
+    const parentTask = await Task.findById({_id: parent });
+    
+    const task = await Task.create({
+      content,
+      status
+    });
+    task.parents.push(parentTask.id);
+    await task.save();
 
-    return res.status(200).json({msg:'ok'})
+    return res.status(200).json({task:task.id});
   } catch ( error ) {
     console.error(`task.controller@newTask: ${error.toString()}`);
     return res.status(500).json({ error: `Internal server error. \n ${error.toString()}` });

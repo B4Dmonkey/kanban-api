@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { STATUS_TYPES, TODO } from './enums';
 const { Schema } = mongoose;
 
 const taskSchema = new Schema({
@@ -17,8 +18,8 @@ const taskSchema = new Schema({
   status: {
     type: String,
     required: true,
-    default: 'todo',
-    enum: ['root','todo', 'doing', 'done' ]
+    default: TODO,
+    enum: STATUS_TYPES
   },
   archived: {
     type: Boolean,
