@@ -6,7 +6,7 @@ const taskSchema = new Schema({
   parents: [{
     type: Schema.Types.ObjectId,
     ref: 'Task',
-    // required: true // ? whats the root task if i require this ? 
+    required: true
   }],
   children: [{
     type: Schema.Types.ObjectId,

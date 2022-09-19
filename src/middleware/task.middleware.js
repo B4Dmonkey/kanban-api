@@ -32,8 +32,7 @@ exports.validStatus = async(req, res, next) => {
         status && 
         !STATUS_TYPES.includes(status)
       ) ||
-      status === null ||
-      status === undefined
+      status === null
     ) return res.status(404).json({error: 'Invalid status'});
     next();
   } catch (error) {

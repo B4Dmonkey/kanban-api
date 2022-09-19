@@ -46,7 +46,10 @@ const newTask = async(req, res) => {
 
 const getTask = async(req, res) => {
   try{
-
+    const { id } = req.query;
+    const task = await Task.findById({_id: id});
+    if(!task) return res.status(404).json({error: 'Task not found'});
+    return res.status(200).json({task});
   } catch ( error ) {
     console.error(`task.controller@getTask: ${error.toString()}`);
     return res.status(500).json({ error: `Internal server error. \n ${error.toString()}` });
@@ -55,7 +58,14 @@ const getTask = async(req, res) => {
 
 const updateTask = async(req, res) => {
   try{
-
+    const {
+      id,
+      parent,
+      children,
+      content,
+      status,
+    } = req.body;
+    
   } catch ( error ) {
     console.error(`task.controller@updateTask: ${error.toString()}`);
     return res.status(500).json({ error: `Internal server error. \n ${error.toString()}` });
@@ -69,7 +79,7 @@ const archiveTask = async(req, res) => {
     console.error(`task.controller@updateTask: ${error.toString()}`);
     return res.status(500).json({ error: `Internal server error. \n ${error.toString()}` });
   }
-}
+};
 
 module.exports = {
   rootTask,
