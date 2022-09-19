@@ -40,3 +40,15 @@ exports.validStatus = async(req, res, next) => {
     return res.status(500).json({ error: `Internal server error. \n ${error.toString()}`});
   }
 };
+
+exports.isTask = async(req, res, next) => {
+  try {
+    const { id } = req.body;
+    const task = await Task.findById({ _id: id });
+    if(!task) return res.status(404).json({error:'Task not found'});
+    next();
+  } catch (error) {
+    console.error(`middleware - task.middleware@isTask: ${error.toString()}`);
+    return res.status(500).json({ error: `Internal server error. \n ${error.toString()}`});
+  }
+};

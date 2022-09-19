@@ -2,6 +2,7 @@ import express from 'express';
 import {
   hasParent,
   hasContent,
+  isTask,
   validStatus
 } from '../middleware/task.middleware';
 import {
@@ -34,6 +35,7 @@ router.get(
 
 router.put(
   '/',
+  isTask,
   updateTask
 );
 
