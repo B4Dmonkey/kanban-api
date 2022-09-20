@@ -65,7 +65,16 @@ const updateTask = async(req, res) => {
       content,
       status,
     } = req.body;
-    
+    const task = Task.findOneAndUpdate(
+      {_id:id},
+      {
+        parent,
+        children,
+        content,
+        status
+      }
+    );
+    return res.status(200).json({task: task.id});
   } catch ( error ) {
     console.error(`task.controller@updateTask: ${error.toString()}`);
     return res.status(500).json({ error: `Internal server error. \n ${error.toString()}` });
