@@ -5,7 +5,6 @@ import Http from 'http';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import task from './routes/task.route';
 
 const PORT = 3000;
 const HOST = '0.0.0.0';
@@ -30,7 +29,6 @@ app.get('/', (req, res) => {
 		});
 	}
 });
-
-app.use('/task',task);
+app.use('/api', require('./routes')); 
 
 server.listen(PORT, () => console.log(`Kanban API is live on port ${PORT}`));
