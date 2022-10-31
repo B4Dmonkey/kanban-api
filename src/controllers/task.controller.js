@@ -65,15 +65,18 @@ const updateTask = async(req, res) => {
       content,
       status,
     } = req.body;
-    const task = Task.findOneAndUpdate(
-      {_id:id},
-      {
-        parent,
-        children,
-        content,
-        status
-      }
-    );
+
+    const filter = {_id: id};
+    const update = {
+      // parent,
+      // children,
+      // content,
+      status
+    };
+
+    const task = await Task.findOneAndUpdate(filter,update);
+
+    console.log('task is ', task)
     return res.status(200).json({task: task.id});
   } catch ( error ) {
     console.error(`task.controller@updateTask: ${error.toString()}`);
